@@ -1,0 +1,123 @@
+<!-- Appointment Modal -->
+<div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="appointmentModalLabel">
+          <i class="fas fa-calendar-plus me-2"></i>
+          Book an Appointment
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="fullName" class="form-label">Full Name *</label>
+              <input type="text" class="form-control" id="fullName" formControlName="fullName" 
+                     [class.is-invalid]="isFieldInvalid('fullName')">
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('fullName')">
+                Full name is required
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="phone" class="form-label">Phone *</label>
+              <input type="tel" class="form-control" id="phone" formControlName="phone" 
+                     [class.is-invalid]="isFieldInvalid('phone')">
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('phone')">
+                Phone number is required
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" class="form-control" id="email" formControlName="email" 
+                     [class.is-invalid]="isFieldInvalid('email')">
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('email')">
+                Valid email is required
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="appointmentDate" class="form-label">Appointment Date *</label>
+              <input type="date" class="form-control" id="appointmentDate" formControlName="appointmentDate" 
+                     [class.is-invalid]="isFieldInvalid('appointmentDate')">
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('appointmentDate')">
+                Appointment date is required
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="treatment" class="form-label">Select Treatment *</label>
+              <select class="form-control" id="treatment" formControlName="treatment" 
+                      [class.is-invalid]="isFieldInvalid('treatment')">
+                <option value="">Select Treatment</option>
+                <option value="neuromuscular">Neuromuscular Disorders</option>
+                <option value="neuropathy">Peripheral Neuropathy</option>
+                <option value="stroke">Stroke</option>
+                <option value="migraine">Migraine</option>
+                <option value="vertigo">Vertigo</option>
+                <option value="epilepsy">Epilepsy</option>
+                <option value="dementia">Dementia</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('treatment')">
+                Please select a treatment
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="location" class="form-label">Select Location *</label>
+              <select class="form-control" id="location" formControlName="location" 
+                      [class.is-invalid]="isFieldInvalid('location')">
+                <option value="">Select Location</option>
+                <option value="khetarpal">Khetarpal Nursing Home, Rajouri Garden</option>
+                <option value="kapoor">Kapoor Medical Centre, Naraina</option>
+                <option value="mgs">MGS UKAR Cancer OPD, Punjabi Bagh</option>
+                <option value="neurocare">Neurocare Solutions, Doctors Plaza</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('location')">
+                Please select a location
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="time" class="form-label">Select Time *</label>
+              <select class="form-control" id="time" formControlName="time" 
+                      [class.is-invalid]="isFieldInvalid('time')">
+                <option value="">Select Time</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="16:00">04:00 PM</option>
+                <option value="17:00">05:00 PM</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('time')">
+                Please select a time
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="message" class="form-label">Message (Optional)</label>
+              <textarea class="form-control" id="message" formControlName="message" rows="3" 
+                        placeholder="Any additional information..."></textarea>
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="appointmentForm.invalid">
+              <i class="fas fa-calendar-check me-2"></i>
+              Book Appointment
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

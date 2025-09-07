@@ -1,0 +1,44 @@
+<app-hero></app-hero>
+
+<!-- Stats Section -->
+<section class="stats-section py-5 bg-primary text-white">
+  <div class="container">
+    <div class="row text-center">
+      @for (stat of stats; track stat.id) {
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-icon mb-3">
+              <i [class]="stat.icon"></i>
+            </div>
+            <h3 class="stat-number">{{ stat.number }}</h3>
+            <p class="stat-label">{{ stat.label }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<app-treatments></app-treatments>
+
+<app-testimonials></app-testimonials>
+
+<!-- CTA Section -->
+<section class="cta-section section-padding bg-primary text-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h2 class="cta-title">Are You Ready? Book Appointment Now!</h2>
+        <p class="cta-description">
+          Don't wait for your neurological concerns. Schedule your appointment today and get expert care from Dr. Varun Rehani.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <button class="btn btn-light btn-lg" (click)="openAppointmentModal()">
+          <i class="fas fa-calendar-plus me-2"></i>
+          Book an Appointment
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

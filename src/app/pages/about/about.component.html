@@ -1,0 +1,127 @@
+<div class="about-page">
+  <!-- Hero Section -->
+  <section class="about-hero section-padding">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1 class="about-title">About {{ doctorInfo.name || 'Dr. John Doe' }}</h1>
+          <p class="about-subtitle">Experienced {{ doctorInfo.title || 'Medical Professional' }} with {{ doctorInfo.experience || '10+ Years' }} of Practice</p>
+          <p class="about-description">
+            {{ doctorInfo.description || 'Experienced medical professional with comprehensive training and expertise in healthcare.' }}
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <div class="doctor-image">
+            <i class="fas fa-user-md"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="education-section section-padding bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="section-title">Education & Qualifications</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="education-card">
+            <div class="education-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h4>MBBS</h4>
+            <p>Vardhman & Mahavir Medical College and Safdarjung Hospital, New Delhi</p>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <div class="education-card">
+            <div class="education-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h4>MD in Medicine</h4>
+            <p>Atal Bihari Vajpayee Institute of Medical Sciences & Dr. RML Hospital, NEW DELHI</p>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <div class="education-card">
+            <div class="education-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h4>DNB in Neurology</h4>
+            <p>Army Hospital Research and Referal, New Delhi</p>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <div class="education-card">
+            <div class="education-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <h4>MRCP Speciality Certificate</h4>
+            <p>Neurology for the UK</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="experience-section section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="section-title">Professional Experience</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="experience-content">
+            <div class="experience-item">
+              <div class="experience-icon">
+                <i class="fas fa-hospital"></i>
+              </div>
+              <div class="experience-details">
+                <h4>Current Practice</h4>
+                <h5>BLK MAX Hospital, Delhi</h5>
+                <p>Currently practicing as a neurologist, providing comprehensive neurological care and treatment to patients.</p>
+              </div>
+            </div>
+            <div class="experience-item">
+              <div class="experience-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="experience-details">
+                <h4>Experience</h4>
+                <h5>11+ Years</h5>
+                <p>Over 11 years of experience in the medical field, specializing in neurological disorders and treatments.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section section-padding bg-primary text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h2 class="cta-title">Ready to Schedule Your Appointment?</h2>
+          <p class="cta-description">
+            Don't wait for your neurological concerns. Schedule your appointment today and get expert care from Dr. Varun Rehani.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <button class="btn btn-light btn-lg" (click)="openAppointmentModal()">
+            <i class="fas fa-calendar-plus me-2"></i>
+            Book an Appointment
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

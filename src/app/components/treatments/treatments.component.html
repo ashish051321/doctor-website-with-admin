@@ -1,0 +1,29 @@
+<section id="treatments" class="section-padding bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title">Treatments</h2>
+        <p class="section-subtitle">
+          Comprehensive neurological care for various conditions with expert diagnosis and treatment
+        </p>
+      </div>
+    </div>
+    
+    <div class="row">
+      @for (treatment of treatments; track treatment.id) {
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card treatment-card h-100">
+            <div class="card-body text-center">
+              <div class="treatment-icon mb-3">
+                <i [class]="treatment.icon"></i>
+              </div>
+              <h5 class="card-title">{{ treatment.title }}</h5>
+              <p class="card-text">{{ treatment.description }}</p>
+              <button class="btn btn-outline-primary">View Details</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+.treatment-card {
+  transition: all 0.3s ease;
+  border: none;
+  background: white;
+}
+
+.treatment-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.treatment-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-color), #1e3d6f);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.treatment-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.treatment-card:hover .treatment-icon {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(44, 90, 160, 0.3);
+}
+
+.card-title {
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}

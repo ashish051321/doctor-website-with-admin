@@ -1,0 +1,328 @@
+<div class="admin-page">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 col-lg-2 sidebar">
+        <div class="admin-header">
+          <h4><i class="fas fa-cog me-2"></i>Admin Panel</h4>
+        </div>
+        <nav class="admin-nav">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'doctor'" (click)="setActiveTab('doctor')">
+                <i class="fas fa-user-md me-2"></i>Doctor Info
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'treatments'" (click)="setActiveTab('treatments')">
+                <i class="fas fa-stethoscope me-2"></i>Treatments
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'testimonials'" (click)="setActiveTab('testimonials')">
+                <i class="fas fa-quote-left me-2"></i>Testimonials
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'contact'" (click)="setActiveTab('contact')">
+                <i class="fas fa-address-book me-2"></i>Contact Info
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'stats'" (click)="setActiveTab('stats')">
+                <i class="fas fa-chart-bar me-2"></i>Statistics
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'settings'" (click)="setActiveTab('settings')">
+                <i class="fas fa-cog me-2"></i>Site Settings
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="admin-actions mt-4">
+          <button class="btn btn-outline-primary btn-sm w-100 mb-2" (click)="previewSite()">
+            <i class="fas fa-eye me-2"></i>Preview Site
+          </button>
+          <button class="btn btn-outline-danger btn-sm w-100" (click)="resetToDefault()">
+            <i class="fas fa-undo me-2"></i>Reset to Default
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-md-9 col-lg-10 main-content">
+        <div class="admin-content">
+          <div class="alert alert-info" *ngIf="!activeTab">
+            <h4>Welcome to Admin Panel</h4>
+            <p>Select a section from the sidebar to start managing your website content.</p>
+          </div>
+          
+          <!-- Doctor Info Tab -->
+          <div *ngIf="activeTab === 'doctor'" class="tab-content">
+            <h3>Doctor Information</h3>
+            <form (ngSubmit)="saveDoctorInfo()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Doctor Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="doctorInfo.name" 
+                         name="name" placeholder="Dr. John Doe">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Title/Specialization</label>
+                  <input type="text" class="form-control" [(ngModel)]="doctorInfo.title" 
+                         name="title" placeholder="Neurologist">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Years of Experience</label>
+                  <input type="text" class="form-control" [(ngModel)]="doctorInfo.experience" 
+                         name="experience" placeholder="10+ years">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Current Practice</label>
+                  <input type="text" class="form-control" [(ngModel)]="doctorInfo.currentPractice" 
+                         name="currentPractice" placeholder="General Hospital">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" [(ngModel)]="doctorInfo.description" 
+                          name="description" rows="4" 
+                          placeholder="Brief description about the doctor..."></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Education (one per line)</label>
+                <textarea class="form-control" [(ngModel)]="educationText" 
+                          name="education" rows="4" 
+                          placeholder="MBBS from Medical College&#10;MD in Medicine&#10;DNB in Neurology"
+                          (ngModelChange)="updateEducation($event)"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Doctor Info</button>
+            </form>
+          </div>
+
+          <!-- Treatments Tab -->
+          <div *ngIf="activeTab === 'treatments'" class="tab-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3>Treatments</h3>
+              <button class="btn btn-success" (click)="addTreatment()">
+                <i class="fas fa-plus me-2"></i>Add Treatment
+              </button>
+            </div>
+            <div class="treatments-list">
+              <div *ngFor="let treatment of treatments; let i = index" class="treatment-item mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" [(ngModel)]="treatment.title" 
+                               placeholder="Treatment Title">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Icon (FontAwesome class)</label>
+                        <input type="text" class="form-control" [(ngModel)]="treatment.icon" 
+                               placeholder="fas fa-brain">
+                      </div>
+                      <div class="col-md-5">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" [(ngModel)]="treatment.description" rows="2" 
+                                  placeholder="Treatment description..."></textarea>
+                      </div>
+                      <div class="col-md-1 d-flex align-items-end">
+                        <button class="btn btn-danger btn-sm" (click)="removeTreatment(i)">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="saveTreatments()">Save Treatments</button>
+          </div>
+
+          <!-- Testimonials Tab -->
+          <div *ngIf="activeTab === 'testimonials'" class="tab-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3>Testimonials</h3>
+              <button class="btn btn-success" (click)="addTestimonial()">
+                <i class="fas fa-plus me-2"></i>Add Testimonial
+              </button>
+            </div>
+            <div class="testimonials-list">
+              <div *ngFor="let testimonial of testimonials; let i = index" class="testimonial-item mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label class="form-label">Patient Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="testimonial.name" 
+                               placeholder="Patient Name">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Role</label>
+                        <input type="text" class="form-control" [(ngModel)]="testimonial.role" 
+                               placeholder="Patient">
+                      </div>
+                      <div class="col-md-2">
+                        <label class="form-label">Rating</label>
+                        <select class="form-control" [(ngModel)]="testimonial.rating">
+                          <option value="1">1 Star</option>
+                          <option value="2">2 Stars</option>
+                          <option value="3">3 Stars</option>
+                          <option value="4">4 Stars</option>
+                          <option value="5">5 Stars</option>
+                        </select>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Testimonial</label>
+                        <textarea class="form-control" [(ngModel)]="testimonial.content" rows="2" 
+                                  placeholder="Patient testimonial..."></textarea>
+                      </div>
+                      <div class="col-md-1 d-flex align-items-end">
+                        <button class="btn btn-danger btn-sm" (click)="removeTestimonial(i)">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="saveTestimonials()">Save Testimonials</button>
+          </div>
+
+          <!-- Contact Info Tab -->
+          <div *ngIf="activeTab === 'contact'" class="tab-content">
+            <h3>Contact Information</h3>
+            <form (ngSubmit)="saveContactInfo()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Phone Number</label>
+                  <input type="text" class="form-control" [(ngModel)]="contactInfo.phone" 
+                         name="phone" placeholder="+1234567890">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" [(ngModel)]="contactInfo.email" 
+                         name="email" placeholder="info@doctor.com">
+                </div>
+              </div>
+              
+              <h4 class="mt-4">Clinic Locations</h4>
+              <div class="locations-list">
+                <div *ngFor="let location of locations; let i = index" class="location-item mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="form-label">Location Name</label>
+                          <input type="text" class="form-control" [(ngModel)]="location.name" 
+                                 placeholder="Main Clinic">
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Address</label>
+                          <textarea class="form-control" [(ngModel)]="location.address" rows="2" 
+                                    placeholder="123 Medical Street, City, State 12345"></textarea>
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label">Phone</label>
+                          <input type="text" class="form-control" [(ngModel)]="location.phone" 
+                                 placeholder="+1234567890">
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label">Hours</label>
+                          <input type="text" class="form-control" [(ngModel)]="location.hours" 
+                                 placeholder="Mon-Fri: 9-5">
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                          <button class="btn btn-danger btn-sm" (click)="removeLocation(i)">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-success mb-3" (click)="addLocation()">
+                <i class="fas fa-plus me-2"></i>Add Location
+              </button>
+              <br>
+              <button type="submit" class="btn btn-primary">Save Contact Info</button>
+            </form>
+          </div>
+
+          <!-- Statistics Tab -->
+          <div *ngIf="activeTab === 'stats'" class="tab-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3>Statistics</h3>
+              <button class="btn btn-success" (click)="addStat()">
+                <i class="fas fa-plus me-2"></i>Add Statistic
+              </button>
+            </div>
+            <div class="stats-list">
+              <div *ngFor="let stat of stats; let i = index" class="stat-item mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label class="form-label">Number</label>
+                        <input type="text" class="form-control" [(ngModel)]="stat.number" 
+                               placeholder="1000+">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Label</label>
+                        <input type="text" class="form-control" [(ngModel)]="stat.label" 
+                               placeholder="Happy Patients">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Icon (FontAwesome class)</label>
+                        <input type="text" class="form-control" [(ngModel)]="stat.icon" 
+                               placeholder="fas fa-smile">
+                      </div>
+                      <div class="col-md-1 d-flex align-items-end">
+                        <button class="btn btn-danger btn-sm" (click)="removeStat(i)">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="saveStats()">Save Statistics</button>
+          </div>
+
+          <!-- Site Settings Tab -->
+          <div *ngIf="activeTab === 'settings'" class="tab-content">
+            <h3>Site Settings</h3>
+            <form (ngSubmit)="saveSettings()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Site Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="siteSettings.siteName" 
+                         name="siteName" placeholder="Medical Practice">
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label class="form-label">Primary Color</label>
+                  <input type="color" class="form-control" [(ngModel)]="siteSettings.primaryColor" 
+                         name="primaryColor">
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label class="form-label">Secondary Color</label>
+                  <input type="color" class="form-control" [(ngModel)]="siteSettings.secondaryColor" 
+                         name="secondaryColor">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Settings</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
