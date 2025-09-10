@@ -91,10 +91,56 @@ export class AdminComponent implements OnInit {
 
   resetToDefault() {
     if (confirm('Are you sure you want to reset all data to default? This action cannot be undone.')) {
-      this.dataService.resetToDefault();
+      this.dataService.resetToDefaultFromAssets();
       this.loadData();
-      alert('Data has been reset to default values.');
+      alert('Data has been reset to default values from assets.');
     }
+  }
+
+  // New method to export data as JSON
+  exportData() {
+    this.dataService.saveDataToAssets();
+    alert('Data exported successfully! Check your downloads folder.');
+  }
+
+  // Method to import JSON data
+  importData(event: any) {
+    const file = event.target.files[0];
+    if (file && file.type === 'application/json') {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target?.result as string);
+          if (confirm('Are you sure you want to import this data? This will overwrite all current data.')) {
+            // Validate the data structure
+            if (this.validateImportedData(data)) {
+              this.dataService.updateWebsiteData(data);
+              this.loadData();
+              alert('Data imported successfully!');
+            } else {
+              alert('Invalid data format. Please check the JSON file structure.');
+            }
+          }
+        } catch (error) {
+          alert('Error parsing JSON file. Please check the file format.');
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      alert('Please select a valid JSON file.');
+    }
+    // Reset the input
+    event.target.value = '';
+  }
+
+  // Validate imported data structure
+  private validateImportedData(data: any): boolean {
+    return data && 
+           data.doctorInfo && 
+           data.treatments && 
+           data.testimonials && 
+           data.contactInfo && 
+           data.siteSettings;
   }
 
   // Treatment methods

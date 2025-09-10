@@ -69,4 +69,21 @@ export class DataService {
   resetToDefault(): void {
     this.storageService.resetToDefault();
   }
+
+  // New methods for assets functionality
+  resetToDefaultFromAssets(): void {
+    this.storageService.resetToDefaultFromAssets();
+  }
+
+  exportDataAsJson(): string {
+    return this.storageService.exportDataAsJson();
+  }
+
+  saveDataToAssets(): void {
+    this.storageService.saveDataToAssets();
+  }
+
+  updateWebsiteData(data: any): void {
+    this.storageService.saveWebsiteData(data);
+  }
 }

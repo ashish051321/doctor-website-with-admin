@@ -1,0 +1,124 @@
+{
+    "doctorInfo": {
+      "name": "BHAWNA MISHRA",
+      "title": "Neurologist",
+      "experience": "10+ years",
+      "education": [
+        "MBBS from Medical College",
+        "MD in Medicine",
+        "DNB in Neurology"
+      ],
+      "currentPractice": "General Hospital",
+      "description": "Experienced neurologist with comprehensive training and expertise in neurological disorders.",
+      "experienceDetails": [
+        {
+          "id": 1,
+          "title": "Current Practice",
+          "organization": "General Hospital",
+          "description": "Currently practicing as a neurologist, providing comprehensive neurological care and treatment to patients.",
+          "icon": "fas fa-hospital"
+        },
+        {
+          "id": 2,
+          "title": "Experience",
+          "organization": "20+ Years",
+          "description": "Over 10 years of experience in the medical field, specializing in neurological disorders and treatments.",
+          "icon": "fas fa-clock"
+        }
+      ]
+    },
+    "treatments": [
+      {
+        "id": 1,
+        "title": "Treatment 1",
+        "description": "Test of patience",
+        "icon": "fas fa-brain"
+      },
+      {
+        "id": 2,
+        "title": "Treatment 2",
+        "description": "Test of xyz",
+        "icon": "fas fa-head-side-virus"
+      },
+      {
+        "id": 3,
+        "title": "Treatment 3",
+        "description": "Flexing brains",
+        "icon": "fas fa-heartbeat"
+      }
+    ],
+    "testimonials": [
+      {
+        "id": 1,
+        "name": "Patient Name",
+        "role": "Patient",
+        "content": "Excellent care and treatment. Highly recommended!",
+        "rating": 5
+      }
+    ],
+    "blogs": [
+      {
+        "id": 1,
+        "title": "Understanding Neurological Health",
+        "excerpt": "Learn about maintaining good neurological health and preventing disorders.",
+        "date": "10/9/2025",
+        "views": 10,
+        "image": "assets/images/blog1.jpg"
+      }
+    ],
+    "stats": [
+      {
+        "id": 1,
+        "number": "2000+",
+        "label": "Happy Patients",
+        "icon": "fas fa-smile"
+      },
+      {
+        "id": 2,
+        "number": "20+",
+        "label": "Years of Experience",
+        "icon": "fas fa-calendar-alt"
+      },
+      {
+        "id": 3,
+        "number": "2000+",
+        "label": "Successful Treatment",
+        "icon": "fas fa-check-circle"
+      },
+      {
+        "id": 4,
+        "number": "25+",
+        "label": "Publications",
+        "icon": "fas fa-book"
+      }
+    ],
+    "contactInfo": {
+      "phone": "9930517328",
+      "email": "bhawna.11feb@gmail.com",
+      "locations": [
+        {
+          "name": "Pride World City",
+          "address": "C1H-801",
+          "phone": "+919930517328",
+          "hours": "Mon-Fri: 9:00 AM - 5:00 PM"
+        },
+        {
+          "name": "Aundh",
+          "address": "Raheja Chambers, 221/B",
+          "phone": "7558384822",
+          "hours": "Mon-Fri: 9:00 AM - 5:00 PM"
+        },
+        {
+          "name": "TeamCity",
+          "address": "123 Items",
+          "phone": "9982837345",
+          "hours": "Mon-Fri: 9:00 AM - 5:00 PM"
+        }
+      ]
+    },
+    "siteSettings": {
+      "siteName": "Medical Practice",
+      "primaryColor": "#2c5aa0",
+      "secondaryColor": "#f8f9fa"
+    }
+  }

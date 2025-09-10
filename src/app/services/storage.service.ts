@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface DoctorInfo {
   name: string;
@@ -86,7 +87,7 @@ export class StorageService {
   private dataSubject = new BehaviorSubject<WebsiteData>(this.getDefaultData());
   public data$ = this.dataSubject.asObservable();
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
     // Initialize with stored data or default
     this.dataSubject.next(this.getWebsiteData());
   }
@@ -148,6 +149,45 @@ export class StorageService {
   // Reset to default data
   resetToDefault(): void {
     localStorage.removeItem(this.STORAGE_KEY);
+  }
+
+  // Load default data from assets
+  loadDefaultFromAssets(): Observable<WebsiteData> {
+    return this.http.get<WebsiteData>('assets/default-data.json');
+  }
+
+  // Reset to default data from assets
+  resetToDefaultFromAssets(): void {
+    this.loadDefaultFromAssets().subscribe({
+      next: (data) => {
+        this.saveWebsiteData(data);
+        console.log('Data reset to default from assets');
+      },
+      error: (error) => {
+        console.error('Error loading default data from assets:', error);
+        // Fallback to hardcoded default data
+        this.resetToDefault();
+        this.dataSubject.next(this.getDefaultData());
+      }
+    });
+  }
+
+  // Export current data as JSON string
+  exportDataAsJson(): string {
+    const data = this.getWebsiteData();
+    return JSON.stringify(data, null, 2);
+  }
+
+  // Save data to assets (for development purposes)
+  saveDataToAssets(): void {
+    const data = this.exportDataAsJson();
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'website-data.json';
+    link.click();
+    window.URL.revokeObjectURL(url);
   }
 
   // Get default data (fallback)

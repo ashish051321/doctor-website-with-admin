@@ -44,6 +44,16 @@
           <button class="btn btn-outline-primary btn-sm w-100 mb-2" (click)="previewSite()">
             <i class="fas fa-eye me-2"></i>Preview Site
           </button>
+          <button class="btn btn-outline-success btn-sm w-100 mb-2" (click)="exportData()">
+            <i class="fas fa-download me-2"></i>Export Data
+          </button>
+          <div class="mb-2">
+            <input type="file" #fileInput (change)="importData($event)" accept=".json" 
+                   style="display: none;" id="importFile">
+            <button class="btn btn-outline-info btn-sm w-100" (click)="fileInput.click()">
+              <i class="fas fa-upload me-2"></i>Import Data
+            </button>
+          </div>
           <button class="btn btn-outline-danger btn-sm w-100" (click)="resetToDefault()">
             <i class="fas fa-undo me-2"></i>Reset to Default
           </button>
