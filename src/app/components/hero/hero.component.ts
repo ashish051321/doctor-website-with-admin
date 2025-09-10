@@ -19,7 +19,8 @@ export class HeroComponent implements OnInit, OnDestroy {
     experience: '',
     education: [],
     currentPractice: '',
-    description: ''
+    description: '',
+    experienceDetails: []
   };
   
   contactInfo: ContactInfo = {

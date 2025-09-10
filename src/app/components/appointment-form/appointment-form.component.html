@@ -72,13 +72,16 @@
               <select class="form-control" id="location" formControlName="location" 
                       [class.is-invalid]="isFieldInvalid('location')">
                 <option value="">Select Location</option>
-                <option value="khetarpal">Khetarpal Nursing Home, Rajouri Garden</option>
-                <option value="kapoor">Kapoor Medical Centre, Naraina</option>
-                <option value="mgs">MGS UKAR Cancer OPD, Punjabi Bagh</option>
-                <option value="neurocare">Neurocare Solutions, Doctors Plaza</option>
+                <option *ngFor="let location of contactInfo.locations; let i = index" 
+                        [value]="location.name">
+                  {{ location.name }} - {{ location.address }}
+                </option>
               </select>
               <div class="invalid-feedback" *ngIf="isFieldInvalid('location')">
                 Please select a location
+              </div>
+              <div *ngIf="contactInfo.locations.length === 0" class="text-muted small">
+                No locations available. Please contact us directly.
               </div>
             </div>
           </div>

@@ -8,7 +8,16 @@ export interface DoctorInfo {
   education: string[];
   currentPractice: string;
   description: string;
+  experienceDetails: ExperienceItem[];
   image?: string;
+}
+
+export interface ExperienceItem {
+  id: number;
+  title: string;
+  organization: string;
+  description: string;
+  icon: string;
 }
 
 export interface Treatment {
@@ -154,7 +163,23 @@ export class StorageService {
           'DNB in Neurology'
         ],
         currentPractice: 'General Hospital',
-        description: 'Experienced neurologist with comprehensive training and expertise in neurological disorders.'
+        description: 'Experienced neurologist with comprehensive training and expertise in neurological disorders.',
+        experienceDetails: [
+          {
+            id: 1,
+            title: 'Current Practice',
+            organization: 'General Hospital',
+            description: 'Currently practicing as a neurologist, providing comprehensive neurological care and treatment to patients.',
+            icon: 'fas fa-hospital'
+          },
+          {
+            id: 2,
+            title: 'Experience',
+            organization: '10+ Years',
+            description: 'Over 10 years of experience in the medical field, specializing in neurological disorders and treatments.',
+            icon: 'fas fa-clock'
+          }
+        ]
       },
       treatments: [
         {

@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     experience: '',
     education: [],
     currentPractice: '',
-    description: ''
+    description: '',
+    experienceDetails: []
   };
 
   private subscription: Subscription = new Subscription();

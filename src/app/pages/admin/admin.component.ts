@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
-import { DoctorInfo, Treatment, Testimonial, ContactInfo, Stat, Location } from '../../services/storage.service';
+import { DoctorInfo, Treatment, Testimonial, ContactInfo, Stat, Location, ExperienceItem } from '../../services/storage.service';
 
 @Component({
   selector: 'app-admin',
@@ -20,6 +20,7 @@ export class AdminComponent implements OnInit {
   testimonials: Testimonial[] = [];
   locations: Location[] = [];
   stats: Stat[] = [];
+  experienceDetails: ExperienceItem[] = [];
   
   // Forms data
   doctorInfo: DoctorInfo = {
@@ -28,7 +29,8 @@ export class AdminComponent implements OnInit {
     experience: '',
     education: [],
     currentPractice: '',
-    description: ''
+    description: '',
+    experienceDetails: []
   };
   
   contactInfo: ContactInfo = {
@@ -63,6 +65,7 @@ export class AdminComponent implements OnInit {
     this.contactInfo = websiteData.contactInfo;
     this.locations = [...websiteData.contactInfo.locations];
     this.stats = [...websiteData.stats];
+    this.experienceDetails = [...websiteData.doctorInfo.experienceDetails];
     this.siteSettings = websiteData.siteSettings;
   }
 
@@ -186,8 +189,36 @@ export class AdminComponent implements OnInit {
     this.doctorInfo.education = text.split('\n').filter(line => line.trim() !== '');
   }
 
+  // Experience methods
+  addExperience() {
+    const newExperience: ExperienceItem = {
+      id: Date.now(),
+      title: '',
+      organization: '',
+      description: '',
+      icon: 'fas fa-briefcase'
+    };
+    this.experienceDetails.push(newExperience);
+  }
+
+  removeExperience(index: number) {
+    this.experienceDetails.splice(index, 1);
+  }
+
   saveDoctorInfo() {
+    // Validate experience details
+    const validExperiences = this.experienceDetails.filter(exp => 
+      exp.title && exp.title.trim() !== '' && 
+      exp.organization && exp.organization.trim() !== ''
+    );
+    
+    if (this.experienceDetails.length > 0 && validExperiences.length !== this.experienceDetails.length) {
+      alert('Please fill in all required fields (Title and Organization) for experience items.');
+      return;
+    }
+    
     this.updateEducation(this.educationText);
+    this.doctorInfo.experienceDetails = validExperiences;
     this.dataService.updateDoctorInfo(this.doctorInfo);
     alert('Doctor information saved successfully!');
   }

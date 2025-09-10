@@ -28,40 +28,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 mb-4">
+        <div *ngFor="let education of doctorInfo.education; let i = index" class="col-lg-6 mb-4">
           <div class="education-card">
             <div class="education-icon">
-              <i class="fas fa-graduation-cap"></i>
+              <i [class]="getEducationIcon(i)"></i>
             </div>
-            <h4>MBBS</h4>
-            <p>Vardhman & Mahavir Medical College and Safdarjung Hospital, New Delhi</p>
+            <h4>{{ getEducationTitle(education) }}</h4>
+            <p>{{ getEducationDescription(education) }}</p>
           </div>
         </div>
-        <div class="col-lg-6 mb-4">
-          <div class="education-card">
-            <div class="education-icon">
-              <i class="fas fa-user-md"></i>
-            </div>
-            <h4>MD in Medicine</h4>
-            <p>Atal Bihari Vajpayee Institute of Medical Sciences & Dr. RML Hospital, NEW DELHI</p>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="education-card">
-            <div class="education-icon">
-              <i class="fas fa-brain"></i>
-            </div>
-            <h4>DNB in Neurology</h4>
-            <p>Army Hospital Research and Referal, New Delhi</p>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="education-card">
-            <div class="education-icon">
-              <i class="fas fa-certificate"></i>
-            </div>
-            <h4>MRCP Speciality Certificate</h4>
-            <p>Neurology for the UK</p>
+        <div *ngIf="doctorInfo.education.length === 0" class="col-12">
+          <div class="text-center">
+            <p class="text-muted">No education information available.</p>
           </div>
         </div>
       </div>
@@ -79,24 +57,19 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <div class="experience-content">
-            <div class="experience-item">
+            <div *ngFor="let experience of doctorInfo.experienceDetails" class="experience-item">
               <div class="experience-icon">
-                <i class="fas fa-hospital"></i>
+                <i [class]="experience.icon"></i>
               </div>
               <div class="experience-details">
-                <h4>Current Practice</h4>
-                <h5>BLK MAX Hospital, Delhi</h5>
-                <p>Currently practicing as a neurologist, providing comprehensive neurological care and treatment to patients.</p>
+                <h4>{{ experience.title }}</h4>
+                <h5>{{ experience.organization }}</h5>
+                <p>{{ experience.description }}</p>
               </div>
             </div>
-            <div class="experience-item">
-              <div class="experience-icon">
-                <i class="fas fa-clock"></i>
-              </div>
+            <div *ngIf="doctorInfo.experienceDetails.length === 0" class="experience-item">
               <div class="experience-details">
-                <h4>Experience</h4>
-                <h5>11+ Years</h5>
-                <p>Over 11 years of experience in the medical field, specializing in neurological disorders and treatments.</p>
+                <p class="text-muted">No experience information available.</p>
               </div>
             </div>
           </div>
@@ -112,7 +85,7 @@
         <div class="col-lg-8">
           <h2 class="cta-title">Ready to Schedule Your Appointment?</h2>
           <p class="cta-description">
-            Don't wait for your neurological concerns. Schedule your appointment today and get expert care from Dr. Varun Rehani.
+            Don't wait for your neurological concerns. Schedule your appointment today and get expert care from {{ doctorInfo.name || 'Dr. John Doe' }}.
           </p>
         </div>
         <div class="col-lg-4 text-lg-end">
@@ -125,3 +98,4 @@
     </div>
   </section>
 </div>
+

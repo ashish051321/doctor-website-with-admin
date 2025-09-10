@@ -12,5 +12,5 @@ import { AppointmentFormComponent } from './components/appointment-form/appointm
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Dr. Varun Rehani - Neurologist';
+  title = 'Dr. John Doe - Neurologist';
 }

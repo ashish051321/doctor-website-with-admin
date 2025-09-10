@@ -99,6 +99,52 @@
                           placeholder="MBBS from Medical College&#10;MD in Medicine&#10;DNB in Neurology"
                           (ngModelChange)="updateEducation($event)"></textarea>
               </div>
+              
+              <h4 class="mt-4">Professional Experience</h4>
+              <div class="experience-list">
+                <div *ngFor="let experience of experienceDetails; let i = index" class="experience-item mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="form-label">Title <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" [(ngModel)]="experience.title" 
+                                 [name]="'experienceTitle' + i" placeholder="Current Practice" required>
+                          <div *ngIf="!experience.title" class="text-danger small">Title is required</div>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="form-label">Organization <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" [(ngModel)]="experience.organization" 
+                                 [name]="'experienceOrg' + i" placeholder="General Hospital" required>
+                          <div *ngIf="!experience.organization" class="text-danger small">Organization is required</div>
+                        </div>
+                        <div class="col-md-2">
+                          <label class="form-label">Icon (FontAwesome class)</label>
+                          <input type="text" class="form-control" [(ngModel)]="experience.icon" 
+                                 [name]="'experienceIcon' + i" placeholder="fas fa-hospital">
+                          <div class="small text-muted">e.g., fas fa-hospital, fas fa-clock</div>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="form-label">Description</label>
+                          <textarea class="form-control" [(ngModel)]="experience.description" 
+                                    [name]="'experienceDesc' + i" rows="2" 
+                                    placeholder="Experience description..."></textarea>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                          <button class="btn btn-danger btn-sm" (click)="removeExperience(i)" 
+                                  title="Remove this experience item">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-success mb-3" (click)="addExperience()">
+                <i class="fas fa-plus me-2"></i>Add Experience
+              </button>
+              <br>
               <button type="submit" class="btn btn-primary">Save Doctor Info</button>
             </form>
           </div>
@@ -119,16 +165,17 @@
                       <div class="col-md-3">
                         <label class="form-label">Title</label>
                         <input type="text" class="form-control" [(ngModel)]="treatment.title" 
-                               placeholder="Treatment Title">
+                               [name]="'treatmentTitle' + i" placeholder="Treatment Title">
                       </div>
                       <div class="col-md-3">
                         <label class="form-label">Icon (FontAwesome class)</label>
                         <input type="text" class="form-control" [(ngModel)]="treatment.icon" 
-                               placeholder="fas fa-brain">
+                               [name]="'treatmentIcon' + i" placeholder="fas fa-brain">
                       </div>
                       <div class="col-md-5">
                         <label class="form-label">Description</label>
-                        <textarea class="form-control" [(ngModel)]="treatment.description" rows="2" 
+                        <textarea class="form-control" [(ngModel)]="treatment.description" 
+                                  [name]="'treatmentDesc' + i" rows="2" 
                                   placeholder="Treatment description..."></textarea>
                       </div>
                       <div class="col-md-1 d-flex align-items-end">
@@ -160,16 +207,17 @@
                       <div class="col-md-3">
                         <label class="form-label">Patient Name</label>
                         <input type="text" class="form-control" [(ngModel)]="testimonial.name" 
-                               placeholder="Patient Name">
+                               [name]="'testimonialName' + i" placeholder="Patient Name">
                       </div>
                       <div class="col-md-3">
                         <label class="form-label">Role</label>
                         <input type="text" class="form-control" [(ngModel)]="testimonial.role" 
-                               placeholder="Patient">
+                               [name]="'testimonialRole' + i" placeholder="Patient">
                       </div>
                       <div class="col-md-2">
                         <label class="form-label">Rating</label>
-                        <select class="form-control" [(ngModel)]="testimonial.rating">
+                        <select class="form-control" [(ngModel)]="testimonial.rating" 
+                                [name]="'testimonialRating' + i">
                           <option value="1">1 Star</option>
                           <option value="2">2 Stars</option>
                           <option value="3">3 Stars</option>
@@ -179,7 +227,8 @@
                       </div>
                       <div class="col-md-3">
                         <label class="form-label">Testimonial</label>
-                        <textarea class="form-control" [(ngModel)]="testimonial.content" rows="2" 
+                        <textarea class="form-control" [(ngModel)]="testimonial.content" 
+                                  [name]="'testimonialContent' + i" rows="2" 
                                   placeholder="Patient testimonial..."></textarea>
                       </div>
                       <div class="col-md-1 d-flex align-items-end">
@@ -221,22 +270,23 @@
                         <div class="col-md-3">
                           <label class="form-label">Location Name</label>
                           <input type="text" class="form-control" [(ngModel)]="location.name" 
-                                 placeholder="Main Clinic">
+                                 [name]="'locationName' + i" placeholder="Main Clinic">
                         </div>
                         <div class="col-md-4">
                           <label class="form-label">Address</label>
-                          <textarea class="form-control" [(ngModel)]="location.address" rows="2" 
+                          <textarea class="form-control" [(ngModel)]="location.address" 
+                                    [name]="'locationAddress' + i" rows="2" 
                                     placeholder="123 Medical Street, City, State 12345"></textarea>
                         </div>
                         <div class="col-md-2">
                           <label class="form-label">Phone</label>
                           <input type="text" class="form-control" [(ngModel)]="location.phone" 
-                                 placeholder="+1234567890">
+                                 [name]="'locationPhone' + i" placeholder="+1234567890">
                         </div>
                         <div class="col-md-2">
                           <label class="form-label">Hours</label>
                           <input type="text" class="form-control" [(ngModel)]="location.hours" 
-                                 placeholder="Mon-Fri: 9-5">
+                                 [name]="'locationHours' + i" placeholder="Mon-Fri: 9-5">
                         </div>
                         <div class="col-md-1 d-flex align-items-end">
                           <button class="btn btn-danger btn-sm" (click)="removeLocation(i)">
@@ -272,17 +322,17 @@
                       <div class="col-md-2">
                         <label class="form-label">Number</label>
                         <input type="text" class="form-control" [(ngModel)]="stat.number" 
-                               placeholder="1000+">
+                               [name]="'statNumber' + i" placeholder="1000+">
                       </div>
                       <div class="col-md-3">
                         <label class="form-label">Label</label>
                         <input type="text" class="form-control" [(ngModel)]="stat.label" 
-                               placeholder="Happy Patients">
+                               [name]="'statLabel' + i" placeholder="Happy Patients">
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Icon (FontAwesome class)</label>
                         <input type="text" class="form-control" [(ngModel)]="stat.icon" 
-                               placeholder="fas fa-smile">
+                               [name]="'statIcon' + i" placeholder="fas fa-smile">
                       </div>
                       <div class="col-md-1 d-flex align-items-end">
                         <button class="btn btn-danger btn-sm" (click)="removeStat(i)">
