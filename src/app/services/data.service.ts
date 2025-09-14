@@ -66,6 +66,10 @@ export class DataService {
     this.storageService.updateSiteSettings(settings);
   }
 
+  updateHeroSettings(heroSettings: any): void {
+    this.storageService.updateHeroSettings(heroSettings);
+  }
+
   resetToDefault(): void {
     this.storageService.resetToDefault();
   }

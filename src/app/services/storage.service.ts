@@ -26,6 +26,13 @@ export interface Treatment {
   title: string;
   description: string;
   icon: string;
+  slug: string;
+  detailedDescription?: string;
+  symptoms?: string[];
+  causes?: string[];
+  treatments?: string[];
+  prevention?: string[];
+  whenToSeeDoctor?: string[];
 }
 
 export interface Testimonial {
@@ -65,6 +72,16 @@ export interface Location {
   hours?: string;
 }
 
+export interface VideoBackground {
+  enabled: boolean;
+  videoUrl: string;
+  fallbackImage: string;
+  overlayOpacity: number;
+  autoplay: boolean;
+  muted: boolean;
+  loop: boolean;
+}
+
 export interface WebsiteData {
   doctorInfo: DoctorInfo;
   treatments: Treatment[];
@@ -76,6 +93,9 @@ export interface WebsiteData {
     siteName: string;
     primaryColor: string;
     secondaryColor: string;
+  };
+  heroSettings: {
+    videoBackground: VideoBackground;
   };
 }
 
@@ -89,16 +109,37 @@ export class StorageService {
 
   constructor(private http: HttpClient) { 
     // Initialize with stored data or default
-    this.dataSubject.next(this.getWebsiteData());
+    this.initializeData();
+  }
+
+  private initializeData(): void {
+    const stored = localStorage.getItem(this.STORAGE_KEY);
+    if (stored) {
+      this.dataSubject.next(JSON.parse(stored));
+    } else {
+      // Load default data from assets
+      this.loadDefaultDataFromAssets();
+    }
+  }
+
+  private loadDefaultDataFromAssets(): void {
+    this.http.get<WebsiteData>('assets/default-data.json').subscribe({
+      next: (data) => {
+        this.dataSubject.next(data);
+        // Save to localStorage for future use
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      },
+      error: (error) => {
+        console.error('Error loading default data from assets:', error);
+        // Fallback to hardcoded data
+        this.dataSubject.next(this.getDefaultData());
+      }
+    });
   }
 
   // Get all website data
   getWebsiteData(): WebsiteData {
-    const stored = localStorage.getItem(this.STORAGE_KEY);
-    if (stored) {
-      return JSON.parse(stored);
-    }
-    return this.getDefaultData();
+    return this.dataSubject.value;
   }
 
   // Save all website data
@@ -146,6 +187,12 @@ export class StorageService {
     this.saveWebsiteData(data);
   }
 
+  updateHeroSettings(heroSettings: any): void {
+    const data = this.getWebsiteData();
+    data.heroSettings = { ...data.heroSettings, ...heroSettings };
+    this.saveWebsiteData(data);
+  }
+
   // Reset to default data
   resetToDefault(): void {
     localStorage.removeItem(this.STORAGE_KEY);
@@ -158,18 +205,7 @@ export class StorageService {
 
   // Reset to default data from assets
   resetToDefaultFromAssets(): void {
-    this.loadDefaultFromAssets().subscribe({
-      next: (data) => {
-        this.saveWebsiteData(data);
-        console.log('Data reset to default from assets');
-      },
-      error: (error) => {
-        console.error('Error loading default data from assets:', error);
-        // Fallback to hardcoded default data
-        this.resetToDefault();
-        this.dataSubject.next(this.getDefaultData());
-      }
-    });
+    this.loadDefaultDataFromAssets();
   }
 
   // Export current data as JSON string
@@ -226,19 +262,22 @@ export class StorageService {
           id: 1,
           title: 'Neuromuscular Disorders',
           description: 'Comprehensive treatment for neuromuscular conditions affecting the peripheral nervous system.',
-          icon: 'fas fa-brain'
+          icon: 'fas fa-brain',
+          slug: 'neuromuscular-disorders'
         },
         {
           id: 2,
           title: 'Headache Management',
           description: 'Specialized treatment for various types of headaches and migraines.',
-          icon: 'fas fa-head-side-virus'
+          icon: 'fas fa-head-side-virus',
+          slug: 'headache-management'
         },
         {
           id: 3,
           title: 'Stroke Care',
           description: 'Expert care for stroke patients with rehabilitation and prevention strategies.',
-          icon: 'fas fa-heartbeat'
+          icon: 'fas fa-heartbeat',
+          slug: 'stroke-care'
         }
       ],
       testimonials: [
@@ -302,6 +341,17 @@ export class StorageService {
         siteName: 'Medical Practice',
         primaryColor: '#2c5aa0',
         secondaryColor: '#f8f9fa'
+      },
+      heroSettings: {
+        videoBackground: {
+          enabled: false,
+          videoUrl: '',
+          fallbackImage: '',
+          overlayOpacity: 0.4,
+          autoplay: true,
+          muted: true,
+          loop: true
+        }
       }
     };
   }

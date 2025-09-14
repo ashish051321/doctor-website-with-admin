@@ -34,6 +34,11 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'hero'" (click)="setActiveTab('hero')">
+                <i class="fas fa-video me-2"></i>Hero Settings
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" [class.active]="activeTab === 'settings'" (click)="setActiveTab('settings')">
                 <i class="fas fa-cog me-2"></i>Site Settings
               </a>
@@ -168,30 +173,112 @@
               </button>
             </div>
             <div class="treatments-list">
-              <div *ngFor="let treatment of treatments; let i = index" class="treatment-item mb-3">
+              <div *ngFor="let treatment of treatments; let i = index" class="treatment-item mb-4">
                 <div class="card">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">
+                      <i [class]="treatment.icon" class="me-2"></i>
+                      {{ treatment.title || 'New Treatment' }}
+                    </h6>
+                    <div>
+                      <button class="btn btn-sm btn-outline-secondary me-2" type="button" 
+                              [attr.data-bs-toggle]="'collapse'" 
+                              [attr.data-bs-target]="'#treatmentDetails' + i"
+                              [attr.aria-expanded]="false">
+                        <i class="fas fa-chevron-down"></i> Details
+                      </button>
+                      <button class="btn btn-danger btn-sm" (click)="removeTreatment(i)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
                   <div class="card-body">
-                    <div class="row">
+                    <!-- Basic Information -->
+                    <div class="row mb-3">
                       <div class="col-md-3">
-                        <label class="form-label">Title</label>
+                        <label class="form-label">Title *</label>
                         <input type="text" class="form-control" [(ngModel)]="treatment.title" 
-                               [name]="'treatmentTitle' + i" placeholder="Treatment Title">
+                               [name]="'treatmentTitle' + i" placeholder="Treatment Title"
+                               (ngModelChange)="onTreatmentTitleChange(treatment)" required>
                       </div>
-                      <div class="col-md-3">
-                        <label class="form-label">Icon (FontAwesome class)</label>
+                      <div class="col-md-2">
+                        <label class="form-label">Icon</label>
                         <input type="text" class="form-control" [(ngModel)]="treatment.icon" 
                                [name]="'treatmentIcon' + i" placeholder="fas fa-brain">
                       </div>
+                      <div class="col-md-2">
+                        <label class="form-label">URL Slug</label>
+                        <input type="text" class="form-control" [(ngModel)]="treatment.slug" 
+                               [name]="'treatmentSlug' + i" placeholder="treatment-slug">
+                      </div>
                       <div class="col-md-5">
-                        <label class="form-label">Description</label>
+                        <label class="form-label">Short Description</label>
                         <textarea class="form-control" [(ngModel)]="treatment.description" 
                                   [name]="'treatmentDesc' + i" rows="2" 
-                                  placeholder="Treatment description..."></textarea>
+                                  placeholder="Brief treatment description..."></textarea>
                       </div>
-                      <div class="col-md-1 d-flex align-items-end">
-                        <button class="btn btn-danger btn-sm" (click)="removeTreatment(i)">
-                          <i class="fas fa-trash"></i>
-                        </button>
+                    </div>
+
+                    <!-- Detailed Information (Collapsible) -->
+                    <div class="collapse" [id]="'treatmentDetails' + i">
+                      <hr>
+                      
+                      <!-- Detailed Description -->
+                      <div class="mb-3">
+                        <label class="form-label">Detailed Description</label>
+                        <textarea class="form-control" [(ngModel)]="treatment.detailedDescription" 
+                                  [name]="'treatmentDetailedDesc' + i" rows="3" 
+                                  placeholder="Comprehensive description of the condition..."></textarea>
+                      </div>
+
+                      <!-- Symptoms -->
+                      <div class="mb-3">
+                        <label class="form-label">Symptoms (one per line)</label>
+                        <textarea class="form-control" 
+                                  [value]="treatment.symptoms ? treatment.symptoms.join('\n') : ''"
+                                  (input)="updateTreatmentArray(treatment, 'symptoms', $event)"
+                                  [name]="'treatmentSymptoms' + i" rows="4" 
+                                  placeholder="Muscle weakness&#10;Difficulty walking&#10;Pain in affected areas"></textarea>
+                      </div>
+
+                      <!-- Causes -->
+                      <div class="mb-3">
+                        <label class="form-label">Common Causes (one per line)</label>
+                        <textarea class="form-control" 
+                                  [value]="treatment.causes ? treatment.causes.join('\n') : ''"
+                                  (input)="updateTreatmentArray(treatment, 'causes', $event)"
+                                  [name]="'treatmentCauses' + i" rows="4" 
+                                  placeholder="Genetic factors&#10;Autoimmune disorders&#10;Infections"></textarea>
+                      </div>
+
+                      <!-- Treatment Options -->
+                      <div class="mb-3">
+                        <label class="form-label">Treatment Options (one per line)</label>
+                        <textarea class="form-control" 
+                                  [value]="treatment.treatments ? treatment.treatments.join('\n') : ''"
+                                  (input)="updateTreatmentArray(treatment, 'treatments', $event)"
+                                  [name]="'treatmentOptions' + i" rows="4" 
+                                  placeholder="Physical therapy&#10;Medications&#10;Lifestyle modifications"></textarea>
+                      </div>
+
+                      <!-- Prevention -->
+                      <div class="mb-3">
+                        <label class="form-label">Prevention Tips (one per line)</label>
+                        <textarea class="form-control" 
+                                  [value]="treatment.prevention ? treatment.prevention.join('\n') : ''"
+                                  (input)="updateTreatmentArray(treatment, 'prevention', $event)"
+                                  [name]="'treatmentPrevention' + i" rows="4" 
+                                  placeholder="Regular exercise&#10;Healthy diet&#10;Avoiding risk factors"></textarea>
+                      </div>
+
+                      <!-- When to See Doctor -->
+                      <div class="mb-3">
+                        <label class="form-label">When to See a Doctor (one per line)</label>
+                        <textarea class="form-control" 
+                                  [value]="treatment.whenToSeeDoctor ? treatment.whenToSeeDoctor.join('\n') : ''"
+                                  (input)="updateTreatmentArray(treatment, 'whenToSeeDoctor', $event)"
+                                  [name]="'treatmentWhenToSee' + i" rows="4" 
+                                  placeholder="Persistent symptoms&#10;Severe pain&#10;Difficulty with daily activities"></textarea>
                       </div>
                     </div>
                   </div>
@@ -355,6 +442,104 @@
               </div>
             </div>
             <button class="btn btn-primary" (click)="saveStats()">Save Statistics</button>
+          </div>
+
+          <!-- Hero Settings Tab -->
+          <div *ngIf="activeTab === 'hero'" class="tab-content">
+            <h3>Hero Section Settings</h3>
+            <form (ngSubmit)="saveHeroSettings()">
+              <div class="card mb-4">
+                <div class="card-header">
+                  <h5>Video Background Settings</h5>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 mb-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="heroSettings.videoBackground.enabled" 
+                               name="videoEnabled" id="videoEnabled">
+                        <label class="form-check-label" for="videoEnabled">
+                          Enable Video Background
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div *ngIf="heroSettings.videoBackground.enabled">
+                    <div class="row">
+                      <div class="col-md-12 mb-3">
+                        <label class="form-label">Video URL</label>
+                        <input type="url" class="form-control" [(ngModel)]="heroSettings.videoBackground.videoUrl" 
+                               name="videoUrl" placeholder="https://example.com/video.mp4">
+                        <div class="form-text">Enter the URL of your video file (MP4, WebM, or OGG format)</div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-12 mb-3">
+                        <label class="form-label">Fallback Image URL</label>
+                        <input type="url" class="form-control" [(ngModel)]="heroSettings.videoBackground.fallbackImage" 
+                               name="fallbackImage" placeholder="https://example.com/image.jpg">
+                        <div class="form-text">Image to show if video fails to load or on mobile devices</div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-4 mb-3">
+                        <label class="form-label">Overlay Opacity</label>
+                        <input type="range" class="form-range" min="0" max="1" step="0.1" 
+                               [(ngModel)]="heroSettings.videoBackground.overlayOpacity" 
+                               name="overlayOpacity" id="overlayOpacity">
+                        <div class="form-text">Current: {{ (heroSettings.videoBackground.overlayOpacity * 100).toFixed(0) }}%</div>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" [(ngModel)]="heroSettings.videoBackground.autoplay" 
+                                 name="autoplay" id="autoplay">
+                          <label class="form-check-label" for="autoplay">
+                            Autoplay Video
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" [(ngModel)]="heroSettings.videoBackground.muted" 
+                                 name="muted" id="muted">
+                          <label class="form-check-label" for="muted">
+                            Muted (Required for autoplay)
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-4 mb-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" [(ngModel)]="heroSettings.videoBackground.loop" 
+                                 name="loop" id="loop">
+                          <label class="form-check-label" for="loop">
+                            Loop Video
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="alert alert-info">
+                <h6><i class="fas fa-info-circle me-2"></i>Video Background Tips:</h6>
+                <ul class="mb-0">
+                  <li>Use MP4 format for best browser compatibility</li>
+                  <li>Keep video file size under 10MB for better performance</li>
+                  <li>Recommended resolution: 1920x1080 or higher</li>
+                  <li>Videos are automatically muted for autoplay compliance</li>
+                  <li>Fallback image is recommended for mobile devices</li>
+                </ul>
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Save Hero Settings</button>
+            </form>
           </div>
 
           <!-- Site Settings Tab -->

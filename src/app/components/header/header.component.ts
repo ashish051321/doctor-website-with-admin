@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
-import { DoctorInfo, WebsiteData } from '../../services/storage.service';
+import { DoctorInfo, WebsiteData, Treatment } from '../../services/storage.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     experienceDetails: []
   };
 
+  treatments: Treatment[] = [];
+
   private subscription: Subscription = new Subscription();
 
   constructor(private dataService: DataService) {}
@@ -33,6 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.dataService.getDataObservable().subscribe((data: WebsiteData) => {
         this.doctorInfo = data.doctorInfo;
+        this.treatments = data.treatments;
       })
     );
   }
@@ -43,6 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   loadData() {
     this.doctorInfo = this.dataService.getDoctorInfo();
+    this.treatments = this.dataService.getTreatments();
   }
 
   openAppointmentModal() {

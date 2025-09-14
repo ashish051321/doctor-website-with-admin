@@ -1,4 +1,26 @@
-<section class="hero-section">
+<section class="hero-section" [class.video-background]="heroSettings.videoBackground.enabled">
+  <!-- Video Background -->
+  <div class="video-background-container" *ngIf="heroSettings.videoBackground.enabled && heroSettings.videoBackground.videoUrl">
+    <video 
+      class="video-background-video"
+      [src]="heroSettings.videoBackground.videoUrl"
+      [autoplay]="heroSettings.videoBackground.autoplay"
+      [muted]="heroSettings.videoBackground.muted"
+      [loop]="heroSettings.videoBackground.loop"
+      playsinline
+      preload="metadata">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay" [style.opacity]="heroSettings.videoBackground.overlayOpacity"></div>
+  </div>
+  
+  <!-- Fallback Image Background -->
+  <div class="image-background-container" 
+       *ngIf="heroSettings.videoBackground.enabled && !heroSettings.videoBackground.videoUrl && heroSettings.videoBackground.fallbackImage"
+       [style.background-image]="'url(' + heroSettings.videoBackground.fallbackImage + ')'">
+    <div class="image-overlay" [style.opacity]="heroSettings.videoBackground.overlayOpacity"></div>
+  </div>
+
   <div class="container">
     <div class="row align-items-center min-vh-100">
       <div class="col-lg-6">

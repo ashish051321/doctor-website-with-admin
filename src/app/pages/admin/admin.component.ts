@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
-import { DoctorInfo, Treatment, Testimonial, ContactInfo, Stat, Location, ExperienceItem } from '../../services/storage.service';
+import { DoctorInfo, Treatment, Testimonial, ContactInfo, Stat, Location, ExperienceItem, VideoBackground } from '../../services/storage.service';
 
 @Component({
   selector: 'app-admin',
@@ -45,6 +45,18 @@ export class AdminComponent implements OnInit {
     secondaryColor: '#f8f9fa'
   };
   
+  heroSettings = {
+    videoBackground: {
+      enabled: false,
+      videoUrl: '',
+      fallbackImage: '',
+      overlayOpacity: 0.4,
+      autoplay: true,
+      muted: true,
+      loop: true
+    } as VideoBackground
+  };
+  
   educationText: string = '';
 
   constructor(
@@ -67,6 +79,7 @@ export class AdminComponent implements OnInit {
     this.stats = [...websiteData.stats];
     this.experienceDetails = [...websiteData.doctorInfo.experienceDetails];
     this.siteSettings = websiteData.siteSettings;
+    this.heroSettings = websiteData.heroSettings || this.heroSettings;
   }
 
   setActiveTab(tab: string) {
@@ -80,6 +93,7 @@ export class AdminComponent implements OnInit {
       'testimonials': 'Testimonials',
       'contact': 'Contact Information',
       'stats': 'Statistics',
+      'hero': 'Hero Settings',
       'settings': 'Site Settings'
     };
     return titles[this.activeTab] || '';
@@ -149,9 +163,34 @@ export class AdminComponent implements OnInit {
       id: Date.now(),
       title: '',
       description: '',
-      icon: 'fas fa-medical'
+      icon: 'fas fa-medical',
+      slug: ''
     };
     this.treatments.push(newTreatment);
+  }
+
+  generateSlug(title: string): string {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  }
+
+  onTreatmentTitleChange(treatment: Treatment) {
+    if (treatment.title) {
+      treatment.slug = this.generateSlug(treatment.title);
+    }
+  }
+
+  updateTreatmentArray(treatment: Treatment, property: keyof Treatment, event: any) {
+    const value = event.target.value;
+    if (value) {
+      (treatment as any)[property] = value.split('\n').filter((item: string) => item.trim() !== '');
+    } else {
+      (treatment as any)[property] = [];
+    }
   }
 
   removeTreatment(index: number) {
@@ -267,6 +306,12 @@ export class AdminComponent implements OnInit {
     this.doctorInfo.experienceDetails = validExperiences;
     this.dataService.updateDoctorInfo(this.doctorInfo);
     alert('Doctor information saved successfully!');
+  }
+
+  // Hero settings methods
+  saveHeroSettings() {
+    this.dataService.updateHeroSettings(this.heroSettings);
+    alert('Hero settings saved successfully!');
   }
 
   // Site settings methods

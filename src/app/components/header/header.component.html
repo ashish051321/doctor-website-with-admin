@@ -23,14 +23,13 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" routerLink="/" fragment="treatments">All Treatments</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">Neuromuscular Disorders</a></li>
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">Peripheral Neuropathy</a></li>
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">Stroke</a></li>
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">Migraine</a></li>
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">Vertigo</a></li>
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">Epilepsy</a></li>
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">Dementia</a></li>
+            <li><hr class="dropdown-divider" *ngIf="treatments.length > 0"></li>
+            <li *ngFor="let treatment of treatments">
+              <a class="dropdown-item" [routerLink]="['/treatment', treatment.slug]" 
+                 data-bs-dismiss="dropdown">
+                <i [class]="treatment.icon" class="me-2"></i>{{ treatment.title }}
+              </a>
+            </li>
           </ul>
         </li>
         <li class="nav-item">

@@ -6,7 +6,7 @@ import { TreatmentsComponent } from '../../components/treatments/treatments.comp
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { DataService } from '../../services/data.service';
-import { Stat, WebsiteData } from '../../services/storage.service';
+import { DoctorInfo, Stat, WebsiteData } from '../../services/storage.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,6 +25,7 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   stats: Stat[] = [];
+  doctorInfo: DoctorInfo | null= null;
   private subscription: Subscription = new Subscription();
 
   constructor(private dataService: DataService) {}
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.dataService.getDataObservable().subscribe((data: WebsiteData) => {
         this.stats = data.stats;
+        this.doctorInfo = data.doctorInfo;
       })
     );
   }

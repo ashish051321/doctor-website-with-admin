@@ -146,6 +146,49 @@
   color: #0c5460;
 }
 
+// Treatment-specific styles
+.treatment-item {
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    
+    h6 {
+      color: #495057;
+      font-weight: 600;
+    }
+  }
+  
+  .collapse {
+    .form-label {
+      font-weight: 500;
+      color: #495057;
+      margin-bottom: 0.5rem;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+  }
+  
+  .btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+    
+    &:hover {
+      background-color: #6c757d;
+      border-color: #6c757d;
+      color: white;
+    }
+  }
+}
+
+.treatments-list {
+  .treatment-item:last-child {
+    margin-bottom: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .sidebar {
     min-height: auto;
@@ -157,5 +200,18 @@
   
   .admin-content {
     padding: 1rem;
+  }
+  
+  .treatment-item {
+    .card-body {
+      .row {
+        .col-md-3,
+        .col-md-2,
+        .col-md-4,
+        .col-md-5 {
+          margin-bottom: 1rem;
+        }
+      }
+    }
   }
 }

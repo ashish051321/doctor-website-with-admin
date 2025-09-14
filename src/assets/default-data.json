@@ -30,21 +30,141 @@
     "treatments": [
       {
         "id": 1,
-        "title": "Treatment 1",
-        "description": "Test of patience",
-        "icon": "fas fa-brain"
+        "title": "Neuromuscular Disorders",
+        "description": "Comprehensive treatment for neuromuscular conditions affecting muscles and nerves",
+        "icon": "fas fa-brain",
+        "slug": "neuromuscular-disorders",
+        "detailedDescription": "Neuromuscular disorders are a group of conditions that affect the muscles and the nerves that control them. These disorders can cause muscle weakness, pain, and other symptoms that can significantly impact daily life.",
+        "symptoms": [
+          "Muscle weakness or fatigue",
+          "Muscle cramps or spasms",
+          "Difficulty with coordination",
+          "Problems with balance and walking",
+          "Breathing difficulties",
+          "Difficulty swallowing"
+        ],
+        "causes": [
+          "Genetic mutations",
+          "Autoimmune disorders",
+          "Infections",
+          "Toxic exposures",
+          "Metabolic disorders",
+          "Trauma or injury"
+        ],
+        "treatments": [
+          "Physical therapy and rehabilitation",
+          "Medications to manage symptoms",
+          "Assistive devices and mobility aids",
+          "Respiratory support if needed",
+          "Surgical interventions when appropriate",
+          "Lifestyle modifications and exercise programs"
+        ],
+        "prevention": [
+          "Regular exercise and physical activity",
+          "Maintaining a healthy diet",
+          "Avoiding known toxins and chemicals",
+          "Genetic counseling for inherited conditions",
+          "Early detection and treatment of underlying conditions"
+        ],
+        "whenToSeeDoctor": [
+          "Persistent muscle weakness or fatigue",
+          "Difficulty with daily activities",
+          "Problems with balance or coordination",
+          "Breathing difficulties",
+          "Sudden onset of muscle symptoms"
+        ]
       },
       {
         "id": 2,
-        "title": "Treatment 2",
-        "description": "Test of xyz",
-        "icon": "fas fa-head-side-virus"
+        "title": "Peripheral Neuropathy",
+        "description": "Specialized care for nerve damage affecting the peripheral nervous system",
+        "icon": "fas fa-head-side-virus",
+        "slug": "peripheral-neuropathy",
+        "detailedDescription": "Peripheral neuropathy occurs when nerves outside the brain and spinal cord are damaged. This can cause pain, numbness, and weakness, typically in the hands and feet.",
+        "symptoms": [
+          "Numbness or tingling in hands and feet",
+          "Sharp, burning, or throbbing pain",
+          "Sensitivity to touch",
+          "Muscle weakness",
+          "Loss of coordination",
+          "Changes in skin, hair, or nails"
+        ],
+        "causes": [
+          "Diabetes (most common cause)",
+          "Chemotherapy drugs",
+          "Infections",
+          "Autoimmune diseases",
+          "Vitamin deficiencies",
+          "Alcohol abuse"
+        ],
+        "treatments": [
+          "Pain management medications",
+          "Physical therapy",
+          "Transcutaneous electrical nerve stimulation (TENS)",
+          "Lifestyle modifications",
+          "Treatment of underlying conditions",
+          "Alternative therapies like acupuncture"
+        ],
+        "prevention": [
+          "Maintaining good blood sugar control if diabetic",
+          "Avoiding excessive alcohol consumption",
+          "Eating a balanced diet rich in B vitamins",
+          "Regular exercise",
+          "Protecting feet from injury"
+        ],
+        "whenToSeeDoctor": [
+          "Persistent numbness or tingling",
+          "Severe pain that interferes with daily activities",
+          "Signs of infection in affected areas",
+          "Difficulty walking or maintaining balance",
+          "Changes in bowel or bladder function"
+        ]
       },
       {
         "id": 3,
-        "title": "Treatment 3",
-        "description": "Flexing brains",
-        "icon": "fas fa-heartbeat"
+        "title": "Stroke",
+        "description": "Emergency and rehabilitation care for stroke patients",
+        "icon": "fas fa-heartbeat",
+        "slug": "stroke",
+        "detailedDescription": "A stroke occurs when blood flow to part of the brain is interrupted, causing brain cells to die. Prompt treatment is crucial for recovery and minimizing long-term effects.",
+        "symptoms": [
+          "Sudden numbness or weakness in face, arm, or leg",
+          "Confusion or trouble speaking",
+          "Trouble seeing in one or both eyes",
+          "Trouble walking, dizziness, or loss of balance",
+          "Severe headache with no known cause"
+        ],
+        "causes": [
+          "High blood pressure",
+          "Smoking",
+          "Diabetes",
+          "High cholesterol",
+          "Atrial fibrillation",
+          "Family history of stroke"
+        ],
+        "treatments": [
+          "Emergency medical treatment (clot-busting drugs)",
+          "Surgical procedures to remove clots",
+          "Rehabilitation therapy",
+          "Medications to prevent future strokes",
+          "Lifestyle modifications",
+          "Support for speech and mobility recovery"
+        ],
+        "prevention": [
+          "Controlling blood pressure",
+          "Managing diabetes",
+          "Quitting smoking",
+          "Maintaining healthy cholesterol levels",
+          "Regular exercise",
+          "Healthy diet low in sodium and saturated fats"
+        ],
+        "whenToSeeDoctor": [
+          "Any signs of stroke (call emergency services immediately)",
+          "Transient ischemic attacks (mini-strokes)",
+          "Risk factors for stroke",
+          "Family history of stroke",
+          "Recovery planning after stroke"
+        ]
       }
     ],
     "testimonials": [

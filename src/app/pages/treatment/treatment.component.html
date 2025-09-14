@@ -1,0 +1,162 @@
+<div class="treatment-page">
+  <!-- Hero Section -->
+
+  <section class="hero-section bg-primary text-white py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/" class="text-white-50">Home</a></li>
+              <li class="breadcrumb-item"><a routerLink="/" fragment="treatments" class="text-white-50">Treatments</a></li>
+              <li class="breadcrumb-item active text-white" aria-current="page">{{ treatment?.title }}</li>
+            </ol>
+          </nav>
+          <h1 class="display-4 fw-bold mb-3">
+            <i [class]="treatment?.icon" class="me-3"></i>
+            {{ treatment?.title }}
+          </h1>
+          <p class="lead mb-4">{{ treatment?.description }}</p>
+          <div class="d-flex gap-3">
+            <button class="btn btn-light btn-lg" (click)="bookAppointment()">
+              <i class="fas fa-calendar-plus me-2"></i>Book Appointment
+            </button>
+            <button class="btn btn-outline-light btn-lg" (click)="goBack()">
+              <i class="fas fa-arrow-left me-2"></i>Back to Home
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-4 text-center">
+          <div class="treatment-icon">
+            <i [class]="treatment?.icon" class="display-1"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-5" *ngIf="!isLoading && treatment">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Overview -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title text-primary">
+                <i class="fas fa-info-circle me-2"></i>Overview
+              </h2>
+              <p class="card-text">{{ treatment?.detailedDescription || treatment?.description }}</p>
+            </div>
+          </div>
+
+          <!-- Symptoms -->
+          <div class="card mb-4" *ngIf="treatment && treatment.symptoms && treatment.symptoms.length > 0">
+            <div class="card-body">
+              <h3 class="card-title text-primary">
+                <i class="fas fa-exclamation-triangle me-2"></i>Symptoms
+              </h3>
+              <ul class="list-unstyled">
+                <li *ngFor="let symptom of treatment.symptoms" class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>{{ symptom }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Causes -->
+          <div class="card mb-4" *ngIf="treatment && treatment.causes && treatment.causes.length > 0">
+            <div class="card-body">
+              <h3 class="card-title text-primary">
+                <i class="fas fa-search me-2"></i>Common Causes
+              </h3>
+              <ul class="list-unstyled">
+                <li *ngFor="let cause of treatment.causes" class="mb-2">
+                  <i class="fas fa-arrow-right text-primary me-2"></i>{{ cause }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Treatments -->
+          <div class="card mb-4" *ngIf="treatment && treatment.treatments && treatment.treatments.length > 0">
+            <div class="card-body">
+              <h3 class="card-title text-primary">
+                <i class="fas fa-stethoscope me-2"></i>Treatment Options
+              </h3>
+              <ul class="list-unstyled">
+                <li *ngFor="let treatmentOption of treatment.treatments" class="mb-2">
+                  <i class="fas fa-medical-bag text-success me-2"></i>{{ treatmentOption }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Prevention -->
+          <div class="card mb-4" *ngIf="treatment && treatment.prevention && treatment.prevention.length > 0">
+            <div class="card-body">
+              <h3 class="card-title text-primary">
+                <i class="fas fa-shield-alt me-2"></i>Prevention
+              </h3>
+              <ul class="list-unstyled">
+                <li *ngFor="let prevention of treatment.prevention" class="mb-2">
+                  <i class="fas fa-heart text-danger me-2"></i>{{ prevention }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- When to See Doctor -->
+          <div class="card mb-4" *ngIf="treatment && treatment.whenToSeeDoctor && treatment.whenToSeeDoctor.length > 0">
+            <div class="card-body">
+              <h3 class="card-title text-primary">
+                <i class="fas fa-user-md me-2"></i>When to See a Doctor
+              </h3>
+              <ul class="list-unstyled">
+                <li *ngFor="let whenToSee of treatment.whenToSeeDoctor" class="mb-2">
+                  <i class="fas fa-clock text-warning me-2"></i>{{ whenToSee }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title text-primary">
+                <i class="fas fa-phone me-2"></i>Need Help?
+              </h4>
+              <p class="card-text">If you're experiencing any of these symptoms or have concerns about your neurological health, don't hesitate to reach out.</p>
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary" (click)="bookAppointment()">
+                  <i class="fas fa-calendar-plus me-2"></i>Schedule Appointment
+                </button>
+                <button class="btn btn-outline-primary" routerLink="/contact">
+                  <i class="fas fa-envelope me-2"></i>Contact Us
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Notice -->
+          <!-- <div class="alert alert-danger mt-4" *ngIf="treatment && treatment.slug === 'stroke'">
+            <h5 class="alert-heading">
+              <i class="fas fa-exclamation-triangle me-2"></i>Emergency Notice
+            </h5>
+            <p class="mb-0">If you or someone you know is experiencing stroke symptoms, call emergency services immediately. Time is critical for stroke treatment.</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading State -->
+  <div class="text-center py-5" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3">Loading treatment information...</p>
+  </div>
+</div>

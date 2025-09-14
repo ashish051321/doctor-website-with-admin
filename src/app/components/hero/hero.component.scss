@@ -3,10 +3,81 @@
   padding-top: 100px;
   position: relative;
   overflow: hidden;
+  
+  &.video-background {
+    background: transparent;
+    padding-top: 0;
+  }
+}
+
+// Video Background Styles
+.video-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+  // Ensure container covers the full viewport
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.video-background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  // Ensure video covers the entire container
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(44, 90, 160, 0.7) 0%, rgba(30, 61, 111, 0.7) 100%);
+  z-index: 0;
+}
+
+// Image Background Styles
+.image-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(44, 90, 160, 0.7) 0%, rgba(30, 61, 111, 0.7) 100%);
+  z-index: 0;
 }
 
 .hero-content {
   padding: 2rem 0;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-title {
@@ -42,6 +113,7 @@
   justify-content: center;
   align-items: center;
   height: 500px;
+  z-index: 1;
 }
 
 .doctor-image {
@@ -135,5 +207,104 @@
   .floating-card {
     padding: 0.8rem 1rem;
     font-size: 0.9rem;
+  }
+  
+  // Mobile video background optimizations
+  .video-background-container {
+    // Container takes 40% of viewport height on mobile
+    height: 40vh;
+    width: 100vw;
+  }
+  
+  .video-background-video {
+    // Video scales to fit the 40% height container properly
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    // Remove the transform since we want it to fit the container exactly
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+  
+  .hero-section.video-background {
+    min-height: 40vh;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  // Ensure content is properly positioned on mobile
+  .hero-content {
+    padding: 1rem 0;
+  }
+  
+  .hero-image {
+    height: 400px;
+  }
+}
+
+// Additional mobile optimizations for very small screens
+@media (max-width: 480px) {
+  .video-background-container {
+    // Maintain 40% height even on very small screens
+    height: 40vh;
+    width: 100vw;
+  }
+  
+  .video-background-video {
+    // Video fits the 40% container properly
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+  
+  .hero-section.video-background {
+    height: auto;
+    min-height: 40vh;
+  }
+  
+  .hero-content {
+    padding: 0.5rem 0;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+  }
+}
+
+// Landscape mobile orientation
+@media (max-width: 768px) and (orientation: landscape) {
+  .video-background-container {
+    // In landscape mode, maintain 40% height
+    height: 40vh;
+    width: 100vw;
+  }
+  
+  .video-background-video {
+    // Video fits the 40% container in landscape mode
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+  
+  .hero-section.video-background {
+    height: auto;
+    min-height: 40vh;
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
-import { DoctorInfo, ContactInfo, WebsiteData } from '../../services/storage.service';
+import { DoctorInfo, ContactInfo, WebsiteData, VideoBackground } from '../../services/storage.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -29,6 +29,18 @@ export class HeroComponent implements OnInit, OnDestroy {
     locations: []
   };
 
+  heroSettings = {
+    videoBackground: {
+      enabled: false,
+      videoUrl: '',
+      fallbackImage: '',
+      overlayOpacity: 0.4,
+      autoplay: true,
+      muted: true,
+      loop: true
+    } as VideoBackground
+  };
+
   private subscription: Subscription = new Subscription();
 
   constructor(private dataService: DataService) {}
@@ -40,6 +52,7 @@ export class HeroComponent implements OnInit, OnDestroy {
       this.dataService.getDataObservable().subscribe((data: WebsiteData) => {
         this.doctorInfo = data.doctorInfo;
         this.contactInfo = data.contactInfo;
+        this.heroSettings = data.heroSettings || this.heroSettings;
       })
     );
   }
@@ -49,8 +62,10 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
-    this.doctorInfo = this.dataService.getDoctorInfo();
-    this.contactInfo = this.dataService.getContactInfo();
+    const websiteData = this.dataService.getWebsiteData();
+    this.doctorInfo = websiteData.doctorInfo;
+    this.contactInfo = websiteData.contactInfo;
+    this.heroSettings = websiteData.heroSettings || this.heroSettings;
   }
 
   openAppointmentModal() {
