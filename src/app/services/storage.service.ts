@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { DataProviderService } from './data-provider.service';
 
 export interface DoctorInfo {
   name: string;
@@ -107,32 +109,45 @@ export class StorageService {
   private dataSubject = new BehaviorSubject<WebsiteData>(this.getDefaultData());
   public data$ = this.dataSubject.asObservable();
 
-  constructor(private http: HttpClient) { 
+  constructor(
+    private http: HttpClient,
+    private dataProvider: DataProviderService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { 
     // Initialize with stored data or default
     this.initializeData();
   }
 
   private initializeData(): void {
-    const stored = localStorage.getItem(this.STORAGE_KEY);
-    if (stored) {
-      this.dataSubject.next(JSON.parse(stored));
-    } else {
-      // Load default data from assets
-      this.loadDefaultDataFromAssets();
+    if (isPlatformBrowser(this.platformId)) {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        this.dataSubject.next(JSON.parse(stored));
+        return;
+      }
     }
+    // For SSR/prerendering, use synchronous data loading
+    if (!isPlatformBrowser(this.platformId)) {
+      this.dataSubject.next(this.dataProvider.getDataSync());
+      return;
+    }
+    // For browser with no stored data, try HTTP request as fallback
+    this.loadDefaultDataFromAssets();
   }
 
   private loadDefaultDataFromAssets(): void {
     this.http.get<WebsiteData>('assets/default-data.json').subscribe({
       next: (data) => {
         this.dataSubject.next(data);
-        // Save to localStorage for future use
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+        // Save to localStorage for future use (only in browser)
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+        }
       },
       error: (error) => {
         console.error('Error loading default data from assets:', error);
-        // Fallback to hardcoded data
-        this.dataSubject.next(this.getDefaultData());
+        // Fallback to imported data
+        this.dataSubject.next(this.dataProvider.getDataSync());
       }
     });
   }
@@ -144,7 +159,9 @@ export class StorageService {
 
   // Save all website data
   saveWebsiteData(data: WebsiteData): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+    }
     console.log('Storage service saved data and notifying subscribers:', data);
     this.dataSubject.next(data);
   }
@@ -195,7 +212,9 @@ export class StorageService {
 
   // Reset to default data
   resetToDefault(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.STORAGE_KEY);
+    }
   }
 
   // Load default data from assets
@@ -216,18 +235,25 @@ export class StorageService {
 
   // Save data to assets (for development purposes)
   saveDataToAssets(): void {
-    const data = this.exportDataAsJson();
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'website-data.json';
-    link.click();
-    window.URL.revokeObjectURL(url);
+    if (isPlatformBrowser(this.platformId)) {
+      const data = this.exportDataAsJson();
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'website-data.json';
+      link.click();
+      window.URL.revokeObjectURL(url);
+    }
   }
 
   // Get default data (fallback)
   private getDefaultData(): WebsiteData {
+    return this.dataProvider.getDefaultData();
+  }
+
+  // Legacy method - keeping for backward compatibility
+  private getDefaultDataLegacy(): WebsiteData {
     return {
       doctorInfo: {
         name: 'Dr. John Doe',
