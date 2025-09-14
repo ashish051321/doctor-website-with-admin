@@ -1,28 +1,29 @@
 {
     "doctorInfo": {
-      "name": "BHAWNA MISHRA",
-      "title": "Neurologist",
-      "experience": "10+ years",
+      "name": "Dr. Seema Shahi",
+      "title": "MD, DNB Neurology, PDF Epilepsy (USA)",
+      "experience": "15+ years",
       "education": [
-        "MBBS from Medical College",
-        "MD in Medicine",
-        "DNB in Neurology"
+        "MBBS - Moti Lal Nehru Medical College, Allahabad (2007)",
+        "MD - Internal Medicine (2011)",
+        "DNB - Neurology, Medanta The Medicity (2021)",
+        "PDF - Epilepsy Fellowship, USA"
       ],
-      "currentPractice": "General Hospital",
-      "description": "Experienced neurologist with comprehensive training and expertise in neurological disorders.",
+      "currentPractice": "Clinical EEG/Epilepsy Fellow - University of Louisville, Kentucky",
+      "description": "Highly qualified neurologist with specialized training in epilepsy, EEG monitoring, and neurophysiology. Currently completing advanced fellowship training in EEG/Epilepsy at University of Louisville, USA.",
       "experienceDetails": [
         {
           "id": 1,
-          "title": "Current Practice",
-          "organization": "General Hospital",
-          "description": "Currently practicing as a neurologist, providing comprehensive neurological care and treatment to patients.",
+          "title": "Current Position",
+          "organization": "University of Louisville, Kentucky",
+          "description": "Clinical EEG/Epilepsy Fellow (July 2024 - June 2025), specializing in epilepsy monitoring, neurostimulation, and presurgical epilepsy workup.",
           "icon": "fas fa-hospital"
         },
         {
           "id": 2,
-          "title": "Experience",
-          "organization": "20+ Years",
-          "description": "Over 10 years of experience in the medical field, specializing in neurological disorders and treatments.",
+          "title": "Previous Experience",
+          "organization": "Artemis Hospital & Axis Spine Clinics",
+          "description": "Attending Neurologist (Oct 2021 - Feb 2023) in Gurugram, India, providing comprehensive neurological care.",
           "icon": "fas fa-clock"
         }
       ]
@@ -30,140 +31,140 @@
     "treatments": [
       {
         "id": 1,
-        "title": "Neuromuscular Disorders",
-        "description": "Comprehensive treatment for neuromuscular conditions affecting muscles and nerves",
+        "title": "Epilepsy & EEG Monitoring",
+        "description": "Comprehensive epilepsy care with advanced EEG monitoring and presurgical evaluation",
         "icon": "fas fa-brain",
-        "slug": "neuromuscular-disorders",
-        "detailedDescription": "Neuromuscular disorders are a group of conditions that affect the muscles and the nerves that control them. These disorders can cause muscle weakness, pain, and other symptoms that can significantly impact daily life.",
+        "slug": "epilepsy-eeg-monitoring",
+        "detailedDescription": "Specialized care for epilepsy patients including continuous EEG monitoring, EMU (Epilepsy Monitoring Unit) evaluation, StereoEEG, ECOG monitoring, and presurgical epilepsy workup to determine optimal treatment strategies.",
         "symptoms": [
-          "Muscle weakness or fatigue",
-          "Muscle cramps or spasms",
-          "Difficulty with coordination",
-          "Problems with balance and walking",
-          "Breathing difficulties",
-          "Difficulty swallowing"
+          "Recurrent seizures",
+          "Loss of consciousness",
+          "Unusual sensations or behaviors",
+          "Memory problems",
+          "Mood changes",
+          "Sleep disturbances"
         ],
         "causes": [
-          "Genetic mutations",
-          "Autoimmune disorders",
-          "Infections",
-          "Toxic exposures",
-          "Metabolic disorders",
-          "Trauma or injury"
+          "Genetic factors",
+          "Brain injuries or trauma",
+          "Infections affecting the brain",
+          "Stroke or brain tumors",
+          "Developmental disorders",
+          "Unknown causes (idiopathic)"
         ],
         "treatments": [
-          "Physical therapy and rehabilitation",
-          "Medications to manage symptoms",
-          "Assistive devices and mobility aids",
-          "Respiratory support if needed",
-          "Surgical interventions when appropriate",
-          "Lifestyle modifications and exercise programs"
+          "Antiepileptic medications",
+          "Continuous EEG monitoring",
+          "Epilepsy surgery evaluation",
+          "Neurostimulation therapy",
+          "Ketogenic diet",
+          "Lifestyle modifications"
         ],
         "prevention": [
-          "Regular exercise and physical activity",
-          "Maintaining a healthy diet",
-          "Avoiding known toxins and chemicals",
-          "Genetic counseling for inherited conditions",
-          "Early detection and treatment of underlying conditions"
+          "Regular medication adherence",
+          "Adequate sleep and stress management",
+          "Avoiding seizure triggers",
+          "Regular medical follow-ups",
+          "Safety precautions and lifestyle modifications"
         ],
         "whenToSeeDoctor": [
-          "Persistent muscle weakness or fatigue",
-          "Difficulty with daily activities",
-          "Problems with balance or coordination",
-          "Breathing difficulties",
-          "Sudden onset of muscle symptoms"
+          "First seizure episode",
+          "Changes in seizure frequency or pattern",
+          "Medication side effects",
+          "Pregnancy planning with epilepsy",
+          "Surgical evaluation consideration"
         ]
       },
       {
         "id": 2,
-        "title": "Peripheral Neuropathy",
-        "description": "Specialized care for nerve damage affecting the peripheral nervous system",
-        "icon": "fas fa-head-side-virus",
-        "slug": "peripheral-neuropathy",
-        "detailedDescription": "Peripheral neuropathy occurs when nerves outside the brain and spinal cord are damaged. This can cause pain, numbness, and weakness, typically in the hands and feet.",
+        "title": "Neurophysiology (EMG/NCV)",
+        "description": "Advanced neurophysiological testing for nerve and muscle disorders",
+        "icon": "fas fa-heartbeat",
+        "slug": "neurophysiology-emg-ncv",
+        "detailedDescription": "Comprehensive neurophysiological evaluation using EMG (Electromyography) and NCV (Nerve Conduction Velocity) studies to diagnose nerve and muscle disorders, peripheral neuropathies, and neuromuscular junction diseases.",
         "symptoms": [
-          "Numbness or tingling in hands and feet",
-          "Sharp, burning, or throbbing pain",
-          "Sensitivity to touch",
-          "Muscle weakness",
-          "Loss of coordination",
-          "Changes in skin, hair, or nails"
+          "Muscle weakness or atrophy",
+          "Numbness or tingling",
+          "Muscle cramps or twitching",
+          "Difficulty with fine motor tasks",
+          "Loss of muscle mass",
+          "Fatigue with minimal exertion"
         ],
         "causes": [
-          "Diabetes (most common cause)",
-          "Chemotherapy drugs",
+          "Diabetes and metabolic disorders",
+          "Autoimmune conditions",
+          "Toxic exposures",
           "Infections",
-          "Autoimmune diseases",
-          "Vitamin deficiencies",
-          "Alcohol abuse"
+          "Genetic disorders",
+          "Trauma or compression"
         ],
         "treatments": [
-          "Pain management medications",
+          "EMG/NCV testing for diagnosis",
+          "Medication management",
           "Physical therapy",
-          "Transcutaneous electrical nerve stimulation (TENS)",
-          "Lifestyle modifications",
+          "Occupational therapy",
           "Treatment of underlying conditions",
-          "Alternative therapies like acupuncture"
+          "Surgical intervention when appropriate"
         ],
         "prevention": [
-          "Maintaining good blood sugar control if diabetic",
-          "Avoiding excessive alcohol consumption",
-          "Eating a balanced diet rich in B vitamins",
+          "Blood sugar control for diabetics",
+          "Avoiding toxic substances",
           "Regular exercise",
-          "Protecting feet from injury"
+          "Proper nutrition",
+          "Early detection and treatment"
         ],
         "whenToSeeDoctor": [
+          "Progressive muscle weakness",
           "Persistent numbness or tingling",
-          "Severe pain that interferes with daily activities",
-          "Signs of infection in affected areas",
-          "Difficulty walking or maintaining balance",
-          "Changes in bowel or bladder function"
+          "Muscle cramps or twitching",
+          "Difficulty with coordination",
+          "Family history of neuromuscular disorders"
         ]
       },
       {
         "id": 3,
-        "title": "Stroke",
-        "description": "Emergency and rehabilitation care for stroke patients",
-        "icon": "fas fa-heartbeat",
-        "slug": "stroke",
-        "detailedDescription": "A stroke occurs when blood flow to part of the brain is interrupted, causing brain cells to die. Prompt treatment is crucial for recovery and minimizing long-term effects.",
+        "title": "General Neurology",
+        "description": "Comprehensive neurological care for various neurological conditions",
+        "icon": "fas fa-user-md",
+        "slug": "general-neurology",
+        "detailedDescription": "Expert care for a wide range of neurological conditions including movement disorders, headaches, cognitive disorders, and other complex neurological diseases with focus on accurate diagnosis and personalized treatment plans.",
         "symptoms": [
-          "Sudden numbness or weakness in face, arm, or leg",
-          "Confusion or trouble speaking",
-          "Trouble seeing in one or both eyes",
-          "Trouble walking, dizziness, or loss of balance",
-          "Severe headache with no known cause"
+          "Headaches and migraines",
+          "Memory problems or confusion",
+          "Movement difficulties",
+          "Sleep disorders",
+          "Dizziness or balance problems",
+          "Speech or language difficulties"
         ],
         "causes": [
-          "High blood pressure",
-          "Smoking",
-          "Diabetes",
-          "High cholesterol",
-          "Atrial fibrillation",
-          "Family history of stroke"
+          "Genetic factors",
+          "Environmental factors",
+          "Infections",
+          "Autoimmune conditions",
+          "Trauma",
+          "Degenerative processes"
         ],
         "treatments": [
-          "Emergency medical treatment (clot-busting drugs)",
-          "Surgical procedures to remove clots",
-          "Rehabilitation therapy",
-          "Medications to prevent future strokes",
+          "Comprehensive neurological evaluation",
+          "Advanced neuroimaging",
+          "Medication management",
+          "Physical and cognitive therapy",
           "Lifestyle modifications",
-          "Support for speech and mobility recovery"
+          "Multidisciplinary care coordination"
         ],
         "prevention": [
-          "Controlling blood pressure",
-          "Managing diabetes",
-          "Quitting smoking",
-          "Maintaining healthy cholesterol levels",
+          "Healthy lifestyle choices",
           "Regular exercise",
-          "Healthy diet low in sodium and saturated fats"
+          "Stress management",
+          "Protective measures against head injury",
+          "Regular health checkups"
         ],
         "whenToSeeDoctor": [
-          "Any signs of stroke (call emergency services immediately)",
-          "Transient ischemic attacks (mini-strokes)",
-          "Risk factors for stroke",
-          "Family history of stroke",
-          "Recovery planning after stroke"
+          "Persistent neurological symptoms",
+          "Changes in cognitive function",
+          "New onset headaches",
+          "Movement difficulties",
+          "Family history of neurological conditions"
         ]
       }
     ],
@@ -189,50 +190,50 @@
     "stats": [
       {
         "id": 1,
-        "number": "2000+",
+        "number": "1000+",
         "label": "Happy Patients",
         "icon": "fas fa-smile"
       },
       {
         "id": 2,
-        "number": "20+",
+        "number": "15+",
         "label": "Years of Experience",
         "icon": "fas fa-calendar-alt"
       },
       {
         "id": 3,
-        "number": "2000+",
-        "label": "Successful Treatment",
-        "icon": "fas fa-check-circle"
+        "number": "500+",
+        "label": "Epilepsy Cases",
+        "icon": "fas fa-brain"
       },
       {
         "id": 4,
-        "number": "25+",
-        "label": "Publications",
+        "number": "5+",
+        "label": "Research Papers",
         "icon": "fas fa-book"
       }
     ],
     "contactInfo": {
-      "phone": "9930517328",
-      "email": "bhawna.11feb@gmail.com",
+      "phone": "+1 3127764917",
+      "email": "find.shahi90@gmail.com",
       "locations": [
         {
-          "name": "Pride World City",
-          "address": "C1H-801",
-          "phone": "+919930517328",
-          "hours": "Mon-Fri: 9:00 AM - 5:00 PM"
+          "name": "University of Louisville",
+          "address": "301 Axis Drive, # 210, Louisville, Kentucky 40206, USA",
+          "phone": "+1 3127764917",
+          "hours": "Mon-Fri: 9:00 AM - 5:00 PM (Fellowship Schedule)"
         },
         {
-          "name": "Aundh",
-          "address": "Raheja Chambers, 221/B",
-          "phone": "7558384822",
-          "hours": "Mon-Fri: 9:00 AM - 5:00 PM"
+          "name": "India Contact",
+          "address": "Delhi/Gurugram, India",
+          "phone": "+91 9953019290",
+          "hours": "Available for consultation"
         },
         {
-          "name": "TeamCity",
-          "address": "123 Items",
-          "phone": "9982837345",
-          "hours": "Mon-Fri: 9:00 AM - 5:00 PM"
+          "name": "Alternative Email",
+          "address": "findshahi@gmail.com",
+          "phone": "+1 3127764917",
+          "hours": "24/7 Email Support"
         }
       ]
     },
