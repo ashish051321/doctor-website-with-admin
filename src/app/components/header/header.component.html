@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
   <div class="container">
-    <a class="navbar-brand fw-bold text-primary" routerLink="/">
+    <a class="navbar-brand fw-bold text-primary" routerLink="/" (click)="closeNavbar()">
       <i class="fas fa-user-md me-2"></i>
       {{ doctorInfo.name || 'Dr. John Doe' }}
     </a>
@@ -9,45 +9,45 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav" #navbarCollapse>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+          <a class="nav-link" routerLink="/" routerLinkActive="active" (click)="closeNavbar()">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="active">About Us</a>
+          <a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNavbar()">About Us</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
             Treatments
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/" fragment="treatments">All Treatments</a></li>
+            <li><a class="dropdown-item" routerLink="/" fragment="treatments" (click)="closeNavbar()">All Treatments</a></li>
             <li><hr class="dropdown-divider" *ngIf="treatments.length > 0"></li>
             <li *ngFor="let treatment of treatments">
               <a class="dropdown-item" [routerLink]="['/treatment', treatment.slug]" 
-                 data-bs-dismiss="dropdown">
+                 data-bs-dismiss="dropdown" (click)="closeNavbar()">
                 <i [class]="treatment.icon" class="me-2"></i>{{ treatment.title }}
               </a>
             </li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" fragment="gallery">Gallery</a>
+          <a class="nav-link" routerLink="/" fragment="gallery" (click)="closeNavbar()">Gallery</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" fragment="blogs">Blogs</a>
+          <a class="nav-link" routerLink="/" fragment="blogs" (click)="closeNavbar()">Blogs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeNavbar()">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/admin" routerLinkActive="active">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active" (click)="closeNavbar()">
             <i class="fas fa-cog me-1"></i>Admin
           </a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-primary ms-2" (click)="openAppointmentModal()">
+          <button class="btn btn-primary ms-2" (click)="openAppointmentModal(); closeNavbar()">
             Book an Appointment
           </button>
         </li>

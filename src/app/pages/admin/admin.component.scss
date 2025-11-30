@@ -1,6 +1,7 @@
 .admin-page {
   min-height: 100vh;
   background-color: #f8f9fa;
+  padding-top: 70px; // Account for fixed header
 }
 
 .sidebar {
@@ -190,6 +191,10 @@
 }
 
 @media (max-width: 768px) {
+  .admin-page {
+    padding-top: 60px; // Slightly less padding on mobile
+  }
+  
   .sidebar {
     min-height: auto;
   }
