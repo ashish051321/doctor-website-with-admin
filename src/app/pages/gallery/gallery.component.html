@@ -1,0 +1,84 @@
+<section class="gallery-page">
+  <div class="gallery-hero">
+    <div class="container">
+      <div class="gallery-header">
+        <h1 class="gallery-title">
+          <i class="fas fa-images me-3"></i>Photo Gallery
+        </h1>
+        <p class="gallery-subtitle">Explore our medical facility and moments of care</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container gallery-container">
+    <div class="gallery-grid" *ngIf="images.length > 0">
+      <div 
+        class="gallery-item" 
+        [ngClass]="getSizeClass(image)"
+        *ngFor="let image of images; let i = index"
+        (click)="openLightbox(image, i)"
+        [style.animation-delay]="(i * 0.1) + 's'">
+        <div class="gallery-image-wrapper">
+          <img 
+            [src]="image.src" 
+            [alt]="image.alt"
+            class="gallery-image"
+            loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-content">
+              <i class="fas fa-search-plus"></i>
+              <p class="gallery-image-title" *ngIf="image.title">{{ image.title }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-gallery" *ngIf="images.length === 0">
+      <i class="fas fa-image"></i>
+      <h3>No images available</h3>
+      <p>Images will appear here once they are added to the assets folder.</p>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" *ngIf="isLightboxOpen" (click)="closeLightbox()">
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <button class="lightbox-close" (click)="closeLightbox()" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <button 
+        class="lightbox-nav lightbox-prev" 
+        (click)="previousImage()" 
+        *ngIf="currentIndex > 0"
+        aria-label="Previous image">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <div class="lightbox-image-container">
+        <img 
+          [src]="selectedImage?.src" 
+          [alt]="selectedImage?.alt"
+          class="lightbox-image">
+        <div class="lightbox-info" *ngIf="selectedImage">
+          <h3 *ngIf="selectedImage.title">{{ selectedImage.title }}</h3>
+          <p>{{ selectedImage.alt }}</p>
+        </div>
+      </div>
+      
+      <button 
+        class="lightbox-nav lightbox-next" 
+        (click)="nextImage()" 
+        *ngIf="currentIndex < images.length - 1"
+        aria-label="Next image">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      
+      <div class="lightbox-counter">
+        {{ currentIndex + 1 }} / {{ images.length }}
+      </div>
+    </div>
+  </div>
+</section>
+
